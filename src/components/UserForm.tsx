@@ -7,16 +7,9 @@ import { UserProps, VariantButton } from 'types';
 import Button from 'components/Button';
 import { addUser } from 'store/slice/users';
 import { useAppDispatch } from 'store/hooks';
+import { userFormSchema } from 'utils/schema';
 
-const validationSchema = yup.object({
-  branchId: yup.number().min(3).required('Please enter numbers only'),
-  userName: yup.string().required().min(4, 'Min 4 characters'),
-  firstName: yup.string().required().min(4, 'Min 4 characters'),
-  lastName: yup.string().required().min(4, 'Min 4 characters'),
-  middleName: yup.string().required().min(4, 'Min 4 characters'),
-  position: yup.string().required().min(4, 'Min 4 characters'),
-  password: yup.string().required().min(4, 'Min 4 characters'),
-});
+
 
 const UserForm = () => {
   const dispatch = useAppDispatch();
@@ -31,7 +24,7 @@ const UserForm = () => {
       password: '',
     },
     enableReinitialize: true,
-    validationSchema,
+    validationSchema:userFormSchema,
     onSubmit: (data: UserProps) => {
       console.log(data);
       if (data) {

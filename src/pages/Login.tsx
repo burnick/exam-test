@@ -8,12 +8,9 @@ import { LoginFormProps, VariantButton } from 'types';
 import { findUser } from 'store/slice/users';
 import { useAppDispatch } from 'store/hooks';
 import useUserContext from 'components/UserContext';
+import { loginFormSchema } from 'utils/schema';
 
-const validationSchema = yup.object({
-  branchId: yup.number().min(3).required('Please enter numbers only'),
-  userName: yup.string().required().min(4, 'Min 3 characters'),
-  password: yup.string().required().min(4, 'Min 4 characters'),
-});
+
 
 const Login = () => {
   const { foundUser } = useUserContext();
@@ -34,14 +31,8 @@ const Login = () => {
       userName: '',
       password: '',
     },
-    validationSchema,
+    validationSchema: loginFormSchema,
     onSubmit: handleSubmit,
-    // onSubmit: (data: LoginFormProps) => {
-    //   if (data) {
-    //     dispatch(findUser(data));
-    //     setIsSubmitClicked(true);
-    //   }
-    // },
   });
 
   return (
