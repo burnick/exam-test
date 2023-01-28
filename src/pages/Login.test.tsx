@@ -6,7 +6,7 @@ import Login from './Login';
 
 afterEach(cleanup);
 
-test('rendersLogin Component', async () => {
+test('renders Login Component', async () => {
   const { getByRole, getByPlaceholderText } = await render(
     <TestComponent>
       <Login />

@@ -3,7 +3,7 @@
 To Run:
 
   1. yarn dev /start
-  2. yarn test
+  2. yarn test --verbose
 
 
 # Getting Started with Create React App
