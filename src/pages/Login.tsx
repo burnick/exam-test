@@ -2,7 +2,6 @@ import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import InputText from '../components/InputText';
 import Button from '../components/Button';
-import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { LoginFormProps, VariantButton } from 'types';
 import { findUser } from 'store/slice/users';

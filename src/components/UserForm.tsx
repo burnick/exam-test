@@ -1,6 +1,5 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
-import * as yup from 'yup';
 import { useFormik } from 'formik';
 import InputText from './InputText';
 import { UserProps, VariantButton } from 'types';
