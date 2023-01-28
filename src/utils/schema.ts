@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 
  const commonSchema = {
-    branchId: yup.number().min(3).required('Please enter numbers only'),
+    branchId: yup.number().min(3).required('Please use numbers only'),
     userName: yup.string().required().min(4, 'Min 3 characters').matches(
         /^[a-zA-Z0-9@]+$/,
         "This field cannot contain white space and special character"
