@@ -1,3 +1,11 @@
+ Install modules 
+   yarn install
+To Run:
+
+  1. yarn dev /start
+  2. yarn test
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
