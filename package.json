@@ -13,6 +13,7 @@
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@types/styled-components": "^5.1.26",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "formik": "^2.2.9",
     "lint-staged": "^13.1.0",
     "nodemon": "^2.0.20",
@@ -34,7 +35,7 @@
     "build": "react-scripts build",
     "test": "NODE_ENV=test react-scripts test",
     "eject": "react-scripts eject",
-    "prettier": "npx prettier --write src/" 
+    "prettier": "npx prettier --write src/"
   },
   "eslintConfig": {
     "extends": [

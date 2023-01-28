@@ -6,14 +6,14 @@
  */
 
 const hexToRgb = (hex: string, alpha: number) => {
-  const r = parseInt(hex.slice(1, 3), 16),
-    g = parseInt(hex.slice(3, 5), 16),
-    b = parseInt(hex.slice(5, 7), 16);
+  const red = parseInt(hex.slice(1, 3), 16),
+    green = parseInt(hex.slice(3, 5), 16),
+    blue = parseInt(hex.slice(5, 7), 16);
 
   if (alpha) {
-    return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + alpha + ')';
+    return 'rgba(' + red + ', ' + green + ', ' + blue + ', ' + alpha + ')';
   }
-  return 'rgb(' + r + ', ' + g + ', ' + b + ')';
+  return 'rgb(' + red + ', ' + green + ', ' + blue + ')';
 };
 
 export default hexToRgb;

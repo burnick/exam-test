@@ -35,7 +35,7 @@ const UserForm = () => {
   const handleReset = useCallback(() => {
     formik.setErrors({});
     formik.resetForm();
-  }, []);
+  }, [formik]);
 
   return (
     <Container>
