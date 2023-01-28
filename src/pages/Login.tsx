@@ -103,7 +103,7 @@ const Container = styled.div`
 
   @media only screen and (hover: none) and (pointer: coarse) and (orientation: landscape) {
     width: 50%;
-    height: 25vh;
+    height: 90vh;
   }
 `;
 
