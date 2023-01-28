@@ -9,8 +9,6 @@ import { addUser } from 'store/slice/users';
 import { useAppDispatch } from 'store/hooks';
 import { userFormSchema } from 'utils/schema';
 
-
-
 const UserForm = () => {
   const dispatch = useAppDispatch();
   const formik = useFormik({
@@ -24,7 +22,7 @@ const UserForm = () => {
       password: '',
     },
     enableReinitialize: true,
-    validationSchema:userFormSchema,
+    validationSchema: userFormSchema,
     onSubmit: (data: UserProps) => {
       console.log(data);
       if (data) {

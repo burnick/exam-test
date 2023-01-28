@@ -10,8 +10,6 @@ import { useAppDispatch } from 'store/hooks';
 import useUserContext from 'components/UserContext';
 import { loginFormSchema } from 'utils/schema';
 
-
-
 const Login = () => {
   const { foundUser } = useUserContext();
   const dispatch = useAppDispatch();
