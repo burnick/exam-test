@@ -2,8 +2,14 @@ import * as yup from 'yup';
 
  const commonSchema = {
     branchId: yup.number().min(3).required('Please enter numbers only'),
-    userName: yup.string().required().min(4, 'Min 3 characters'),
-    password: yup.string().required().min(4, 'Min 4 characters'),
+    userName: yup.string().required().min(4, 'Min 3 characters').matches(
+        /^[a-zA-Z0-9@]+$/,
+        "This field cannot contain white space and special character"
+      ),
+    password: yup.string().required().min(4, 'Min 4 characters').matches(
+        /^[a-zA-Z0-9@]+$/,
+        "This field cannot contain white space and special character"
+      ),
   }
 
 
