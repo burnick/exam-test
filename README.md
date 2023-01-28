@@ -5,6 +5,11 @@ To Run:
   1. yarn dev /start
   2. yarn test --verbose
 
+  Application is using typescript,  context api, redux with redux persis (even hard reload the data is still there), logout to reset or clear your browsers cache
+  using react-testing library for testing
+  yup and formik for form validation
+  prettier for code formatting 
+
 
 # Getting Started with Create React App
 
