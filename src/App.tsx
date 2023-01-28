@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Login from 'pages/Login';
 import AdminPage from 'pages/Admin';
@@ -6,12 +6,7 @@ import useUserContext from 'components/UserContext';
 
 function App() {
   const { foundUser } = useUserContext();
-  useEffect(() => {
-    if (foundUser) {
-      console.log('User is logged in');
-    }
-  }, [foundUser]);
-
+  
   return <Container>{!foundUser ? <Login /> : <AdminPage />}</Container>;
 }
 

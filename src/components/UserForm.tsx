@@ -23,7 +23,6 @@ const UserForm = () => {
     enableReinitialize: true,
     validationSchema: userFormSchema,
     onSubmit: (data: UserProps) => {
-      console.log(data);
       if (data) {
         dispatch(addUser(data));
         formik.resetForm();
