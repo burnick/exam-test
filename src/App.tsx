@@ -6,7 +6,7 @@ import useUserContext from 'components/UserContext';
 
 function App() {
   const { foundUser } = useUserContext();
-  
+
   return <Container>{!foundUser ? <Login /> : <AdminPage />}</Container>;
 }
 

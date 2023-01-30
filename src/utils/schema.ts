@@ -1,7 +1,8 @@
 import * as yup from 'yup';
 
 /**Reusable validation */
-const textValidation = yup
+const textValidation4Characters = yup.string().required().min(4, 'Min 4 characters');
+const textValidationNoSpaces = yup
   .string()
   .required()
   .min(4, 'Min 4 characters')
@@ -12,8 +13,8 @@ const textValidation = yup
 
 const commonSchema = {
   branchId: yup.number().min(3).required('Please use numbers only'),
-  userName: textValidation,
-  password: textValidation,
+  userName: textValidationNoSpaces,
+  password: textValidationNoSpaces,
 };
 
 const loginFormSchema = yup.object().shape({
@@ -22,10 +23,10 @@ const loginFormSchema = yup.object().shape({
 
 const userFormSchema = yup.object().shape({
   ...commonSchema,
-  firstName: yup.string().required().min(4, 'Min 4 characters'),
-  lastName: yup.string().required().min(4, 'Min 4 characters'),
-  middleName: yup.string().required().min(4, 'Min 4 characters'),
-  position: yup.string().required().min(4, 'Min 4 characters'),
+  firstName: textValidation4Characters,
+  lastName: textValidation4Characters,
+  middleName: textValidation4Characters,
+  position: textValidation4Characters,
 });
 
 export { loginFormSchema, userFormSchema };
