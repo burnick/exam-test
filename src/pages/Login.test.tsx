@@ -32,9 +32,7 @@ test('test Branch Id Input  for Number input', async () => {
       <Login />
     </TestComponent>,
   );
-  fireEvent.change(getByPlaceholderText('Branch Id'), {
-    target: { value: '123456789' },
-  });
+  
 
   await act(async () => {
     const { getByPlaceholderText } = await render(
@@ -54,9 +52,7 @@ test('test Branch Id Input  for Letter input', async () => {
       <Login />
     </TestComponent>,
   );
-  fireEvent.change(getByPlaceholderText('Branch Id'), {
-    target: { value: '123456789' },
-  });
+  
 
   await act(async () => {
     const { getByPlaceholderText } = await render(
