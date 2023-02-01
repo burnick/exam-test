@@ -4,7 +4,9 @@ import TestComponent from 'components/TestComponent';
 import userEvent from '@testing-library/user-event';
 import Login from './Login';
 
+beforeAll(() => {});
 afterEach(cleanup);
+afterAll(() => {});
 
 test('renders Login Component', async () => {
   const { getByRole, getByPlaceholderText } = await render(
@@ -26,34 +28,55 @@ test('renders Login Component', async () => {
   expect(userNameElement).toBeVisible();
 });
 
-test('test Branch Id Input  for Number input', async () => {
+test('test Branch Id Input for Number input', async () => {
   const { getByPlaceholderText } = render(
     <TestComponent>
       <Login />
     </TestComponent>,
   );
-  
 
   await act(async () => {
-   
     const inputNode = getByPlaceholderText('Branch Id');
     fireEvent.change(inputNode, { target: { value: '2323' } });
     expect((inputNode as HTMLInputElement).value).toBe('2323');
   });
 });
 
-test('test Branch Id Input  for Letter input', async () => {
+test('test Branch Id Input for Letter input', async () => {
   const { getByPlaceholderText } = render(
     <TestComponent>
       <Login />
     </TestComponent>,
   );
-  
 
   await act(async () => {
     const inputNode = getByPlaceholderText('Branch Id');
     fireEvent.change(inputNode, { target: { value: 'abcde' } });
     expect((inputNode as HTMLInputElement).value).toBe('');
+  });
+});
+
+test('test User name Input for empty', async () => {
+  const errorMessageUserName = 'Error: userName is a required field';
+  const { getByPlaceholderText, getByText } = render(
+    <TestComponent>
+      <Login />
+    </TestComponent>,
+  );
+  const user = userEvent.setup();
+
+  const inputBranchId = getByPlaceholderText('Branch Id');
+  fireEvent.change(inputBranchId, { target: { value: '123456' } });
+  const buttonNode = screen.getByRole('button', { name: /login/i });
+  const inputUsername = getByPlaceholderText('User name');
+  fireEvent.change(inputUsername, { target: { value: '' } });
+
+  await user.click(buttonNode);
+
+  await waitFor(() => {
+    const errorText = screen.getByText(errorMessageUserName);
+    expect(buttonNode).toBeDisabled();
+    expect(errorText).toBeVisible();
   });
 });
 
@@ -67,7 +90,5 @@ test('submit empty form, test Button submit should be disabled', async () => {
   const buttonNode = screen.getByRole('button', { name: /login/i });
   await user.type(screen.getByPlaceholderText('Branch Id'), 'John');
   await user.click(buttonNode);
-  await waitFor(() =>
-    expect(buttonNode).toBeDisabled(),
-  );
+  await waitFor(() => expect(buttonNode).toBeDisabled());
 });

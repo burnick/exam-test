@@ -30,7 +30,7 @@ const userPersistConfig = {
 const persistedReducer = persistReducer(userPersistConfig, userReducer);
 
 export const store = configureStore({
-  //preloadedState: {},
+  preloadedState: {},
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) => [
     ...getDefaultMiddleware({
