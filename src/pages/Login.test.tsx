@@ -34,10 +34,9 @@ test('test Branch Id Input for Number input', async () => {
       <Login />
     </TestComponent>,
   );
-
+  const inputNode = getByPlaceholderText('Branch Id');
+  fireEvent.change(inputNode, { target: { value: '2323' } });
   await act(async () => {
-    const inputNode = getByPlaceholderText('Branch Id');
-    fireEvent.change(inputNode, { target: { value: '2323' } });
     expect((inputNode as HTMLInputElement).value).toBe('2323');
   });
 });
@@ -48,10 +47,9 @@ test('test Branch Id Input for Letter input', async () => {
       <Login />
     </TestComponent>,
   );
-
+  const inputNode = getByPlaceholderText('Branch Id');
+  fireEvent.change(inputNode, { target: { value: 'abcde' } });
   await act(async () => {
-    const inputNode = getByPlaceholderText('Branch Id');
-    fireEvent.change(inputNode, { target: { value: 'abcde' } });
     expect((inputNode as HTMLInputElement).value).toBe('');
   });
 });
