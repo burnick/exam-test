@@ -4,14 +4,14 @@ To Run:
 
   1. yarn dev /start
   2. yarn test --verbose
-  3. Application is using 
-    - typescript  
-    - context api
-    - redux with redux persist (even hard reload of browser, the data is still there)
-    - yup (validations)
-    - formik (form)
-    - prettier and eslint
-    - react-testing library 
+  3. Application is using
+      - typescript  
+      - context api
+      - redux with redux persist (even hard reload of browser, the data is still there)
+      - yup (validations)
+      - formik (form)
+      - prettier and eslint
+      - react-testing library 
     
   Logout to reset or clear your browsers cache
   
