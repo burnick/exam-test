@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 
 /**Reusable validation */
-const textValidation4Characters = yup.string().required().min(4, 'Min 4 characters');
+const textValidationCharacters = yup.string().required().min(4, 'Min 4 characters');
 const textValidationNoSpaces = yup
   .string()
   .required()
@@ -23,10 +23,10 @@ const loginFormSchema = yup.object().shape({
 
 const userFormSchema = yup.object().shape({
   ...commonSchema,
-  firstName: textValidation4Characters,
-  lastName: textValidation4Characters,
-  middleName: textValidation4Characters,
-  position: textValidation4Characters,
+  firstName: textValidationCharacters,
+  lastName: textValidationCharacters,
+  middleName: textValidationCharacters,
+  position: textValidationCharacters,
 });
 
 export { loginFormSchema, userFormSchema };
