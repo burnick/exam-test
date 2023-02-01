@@ -4,8 +4,7 @@ To Run:
 
   1. yarn dev /start
   2. yarn test --verbose
-
-  Application is using 
+  3. Application is using 
     - typescript  
     - context api
     - redux with redux persist (even hard reload of browser, the data is still there)
