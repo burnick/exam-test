@@ -121,6 +121,8 @@ const ProductContainer = styled.div`
 `;
 
 const ProductTitle = styled.div`
+  text-transform: uppercase;
+
   margin-right: 10px;
   font-size: 12px;
   font-weight: bold;
