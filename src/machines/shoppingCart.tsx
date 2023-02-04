@@ -12,33 +12,23 @@ const shoppingCartMachine = createMachine<CartProps, CartEvent>(
     states: {
       idle: {
         on: {
-          ADD_ITEM: { actions: ['addItem'] },
-
+          ADD_ITEM: { actions: ['addItem', 'sendTelemetry'] },
           REMOVE_ONE_ITEM: {
-            actions: ['handleRemove1Item'],
             target: 'idle',
+            actions: ['handleRemove1Item', 'sendTelemetry'],
           },
 
           DELETE_ITEM: {
             actions: ['deleteItem'],
           },
-          CLEAR_CART: {
-            actions: ['clearCart'],
-            target: 'idle',
-          },
+          CLEAR_CART: { target: 'idle', actions: ['clearCart'] },
           TRY_CHECKOUT: 'hasItems',
         },
       },
       hasItems: {
         on: {
-          CHECKOUT: {
-            actions: ['handleCheckout', 'clearCart'],
-            target: 'idle',
-          },
-          CLEAR_CART: {
-            actions: ['clearCart'],
-            target: 'idle',
-          },
+          CHECKOUT: { target: 'idle', actions: ['handleCheckout', 'clearCart'] },
+          CLEAR_CART: { target: 'idle', actions: ['clearCart'] },
           CHECKOUT_SUCCESS: 'success',
           CHECKOUT_ERROR: 'failure',
         },
@@ -54,6 +44,7 @@ const shoppingCartMachine = createMachine<CartProps, CartEvent>(
   {
     actions: {
       addItem: assign((context, event) => {
+        console.info(event.type)
         if (event.type !== 'ADD_ITEM') {
           return context;
         }
@@ -109,6 +100,9 @@ const shoppingCartMachine = createMachine<CartProps, CartEvent>(
       clearCart: assign((context) => {
         return { items: context.items.filter((item) => item.quantity < 1) };
       }),
+      sendTelemetry: () => {
+        console.info('time:', Date.now());
+      },
     },
   },
 );
