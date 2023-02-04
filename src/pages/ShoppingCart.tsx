@@ -2,7 +2,7 @@ import React, { useCallback, useMemo } from 'react';
 import { useMachine } from '@xstate/react';
 import shoppingCartMachine from 'machines/shoppingCart';
 import styled from 'styled-components';
-import { Item } from 'types';
+import { Item, CartEventTypes } from 'types';
 
 const Products = [
   { id: '1', name: 'apple', quantity: 1 },
@@ -16,11 +16,17 @@ const Cart: React.FC = () => {
 
   const { items } = current.context;
 
+  // React.useEffect(() => {
+  //   if (items.length > 0) {
+  //     send({ type: 'HANDLE_ITEM_ADDED', payload: items[0] });
+  //   }
+  // }, [send, items]);
+
   const handleAddItem = useCallback(
     (evt: React.MouseEvent<Element, MouseEvent>, item: Item) => {
       evt.preventDefault();
       if (item) {
-        send({ type: 'ADD_ITEM', item });
+        send({ type: CartEventTypes.ADD_ITEM, item });
       }
     },
     [send],
@@ -31,15 +37,15 @@ const Cart: React.FC = () => {
       evt.preventDefault();
 
       if (id) {
-        send({ type: 'REMOVE_ITEM', id });
+        send({ type: CartEventTypes.REMOVE_ITEM, id });
       }
     },
     [send],
   );
 
-  const handleCheckout = useCallback(()=>{
-    send({type: 'CHECKOUT'})
-  },[send])
+  const handleCheckout = useCallback(() => {
+    send({ type: CartEventTypes.CHECKOUT });
+  }, [send]);
 
   return (
     <div>
@@ -69,7 +75,9 @@ const Cart: React.FC = () => {
           Add {product.name}
         </button>
       ))}
-      <button onClick={handleCheckout} disabled={items.length <= 0 }>Checkout</button>
+      <button onClick={handleCheckout} disabled={items.length <= 0}>
+        Checkout
+      </button>
     </div>
   );
 };

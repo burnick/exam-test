@@ -51,6 +51,16 @@ export interface CartProps {
   items: Item[];
 }
 
+export enum CartEventTypes {
+  REMOVE_ITEM = 'REMOVE_ITEM',
+  ADD_ITEM = 'ADD_ITEM',
+  CHECKOUT = 'CHECKOUT',
+  CANCEL = 'CANCEL',
+  CHECKOUT_SUCCESS = 'CHECKOUT_SUCCESS',
+  CHECKOUT_ERROR = 'CHECKOUT_ERROR',
+  CLEAR_CART = 'CLEAR_CART'
+}
+
 export type CartEvent =
   | { type: 'REMOVE_ITEM'; id: string }
   | { type: 'ADD_ITEM'; item: Item }

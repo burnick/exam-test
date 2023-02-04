@@ -25,8 +25,7 @@ const shoppingCartMachine = createMachine<CartProps, CartEvent>({
             }
 
             return context;
-          })
-          
+          }),
         },
         REMOVE_ITEM: {
           actions: assign((context, event) => {
@@ -34,8 +33,8 @@ const shoppingCartMachine = createMachine<CartProps, CartEvent>({
             return {
               items: [...context.items.filter((item) => item.id !== itemEvt)],
             };
-          })
-        }
+          }),
+        },
       },
     },
     hasItems: {
@@ -45,21 +44,21 @@ const shoppingCartMachine = createMachine<CartProps, CartEvent>({
           //   console.log(context)
           //   return context;
           // }),
-          target: 'idle'
+          target: 'idle',
         },
         CLEAR_CART: {
-          target: 'idle'
+          target: 'idle',
         },
         CHECKOUT_SUCCESS: 'success',
         CHECKOUT_ERROR: 'failure',
-      }
+      },
     },
     success: {
-      type: 'final'
+      type: 'final',
     },
-     failure: {
-      type: 'final'
-    }
+    failure: {
+      type: 'final',
+    },
   },
 });
 
