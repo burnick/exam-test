@@ -54,4 +54,8 @@ export interface CartProps {
 export type CartEvent =
   | { type: 'REMOVE_ITEM'; id: string }
   | { type: 'ADD_ITEM'; item: Item }
+  | { type: 'CHECKOUT' }
+  | { type: 'CANCEL' }
+  | { type: 'CHECKOUT_SUCCESS' }
+  | { type: 'CHECKOUT_ERROR' }
   | { type: 'CLEAR_CART' };

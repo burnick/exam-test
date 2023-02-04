@@ -2,7 +2,7 @@ import { createMachine, assign } from 'xstate';
 import { CartProps, CartEvent, Item } from 'types';
 
 const shoppingCartMachine = createMachine<CartProps, CartEvent>({
-  id: 'cart',
+  id: 'shoppingCartMachine',
   initial: 'idle',
   context: {
     items: [],
@@ -10,42 +10,56 @@ const shoppingCartMachine = createMachine<CartProps, CartEvent>({
   states: {
     idle: {
       on: {
-       
         ADD_ITEM: {
-          actions: assign((ctx, event) => {
+          actions: assign((context, event) => {
             const itemEvt = event.item as Item;
 
-            const findIndex = ctx.items.findIndex((item) => item.id === itemEvt.id);
+            const findIndex = context.items.findIndex((item) => item.id === itemEvt.id);
             if (findIndex !== -1) {
-             ctx.items[findIndex] = {
+              context.items[findIndex] = {
                 ...itemEvt,
-                quantity: ctx.items[findIndex].quantity + 1,
+                quantity: context.items[findIndex].quantity + 1,
               };
-              
             } else {
-              ctx.items.push(itemEvt);
+              context.items.push(itemEvt);
             }
 
-            return ctx;
+            return context;
           })
+          
         },
         REMOVE_ITEM: {
-          actions: assign((ctx, event) => {
+          actions: assign((context, event) => {
             const itemEvt = event.id as string;
-                    return {
-              items: [
-                ...ctx.items.filter(item => item.id !== itemEvt)
-              ]
-            }
-
-          }),
-          target: 'idle',
-        },
+            return {
+              items: [...context.items.filter((item) => item.id !== itemEvt)],
+            };
+          })
+        }
       },
     },
     hasItems: {
-    
+      on: {
+        CHECKOUT: {
+          // actions: assign((context, _) => {
+          //   console.log(context)
+          //   return context;
+          // }),
+          target: 'idle'
+        },
+        CLEAR_CART: {
+          target: 'idle'
+        },
+        CHECKOUT_SUCCESS: 'success',
+        CHECKOUT_ERROR: 'failure',
+      }
     },
+    success: {
+      type: 'final'
+    },
+     failure: {
+      type: 'final'
+    }
   },
 });
 

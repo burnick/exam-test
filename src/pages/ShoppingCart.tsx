@@ -4,11 +4,10 @@ import shoppingCartMachine from 'machines/shoppingCart';
 import styled from 'styled-components';
 import { Item } from 'types';
 
-
 const Products = [
   { id: '1', name: 'apple', quantity: 1 },
-  { id: '2', name: 'banana', quantity: 1 }
-]
+  { id: '2', name: 'banana', quantity: 1 },
+];
 
 const Cart: React.FC = () => {
   const machine = useMemo(() => shoppingCartMachine, []);
@@ -38,6 +37,10 @@ const Cart: React.FC = () => {
     [send],
   );
 
+  const handleCheckout = useCallback(()=>{
+    send({type: 'CHECKOUT'})
+  },[send])
+
   return (
     <div>
       <h2>Shopping Cart</h2>
@@ -45,39 +48,44 @@ const Cart: React.FC = () => {
         {items.map((item, index) => (
           <li key={`li-${index}-${item.id}`}>
             <ProductContainer>
-           <ProductTitle> {item.name} {item.quantity}</ProductTitle>
-            <Button
-              key={`button-${index}-${item}`}
-              onClick={(evt) => handleRemoveItem(evt, item.id)}
-            >
-              Remove
-            </Button></ProductContainer>
+              <ProductTitle>
+                {item.name} {item.quantity}
+              </ProductTitle>
+              <Button
+                key={`button-${index}-${item}`}
+                onClick={(evt) => handleRemoveItem(evt, item.id)}
+              >
+                Remove
+              </Button>
+            </ProductContainer>
           </li>
         ))}
       </ul>
-      {Products.map(product =>  <button key={`button-${product.id}`}
-        onClick={(evt) => handleAddItem(evt, product)}
-      >
-        Add {product.name}
-      </button>)}
-     
+      {Products.map((product) => (
+        <button
+          key={`button-${product.id}`}
+          onClick={(evt) => handleAddItem(evt, product)}
+        >
+          Add {product.name}
+        </button>
+      ))}
+      <button onClick={handleCheckout} disabled={items.length <= 0 }>Checkout</button>
     </div>
   );
 };
-
 
 const ProductContainer = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
   padding: 5px;
-`
+`;
 
 const ProductTitle = styled.div`
   margin-right: 10px;
   font-size: 12px;
   font-weight: bold;
-`
+`;
 
 const Button = styled.button`
   font-size: 10px;
