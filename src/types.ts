@@ -52,20 +52,22 @@ export interface CartProps {
 }
 
 export enum CartEventTypes {
-  REMOVE_ITEM = 'REMOVE_ITEM',
+  DELETE_ITEM = 'DELETE_ITEM',
   ADD_ITEM = 'ADD_ITEM',
+  REMOVE_ONE_ITEM = 'REMOVE_ONE_ITEM',
   CHECKOUT = 'CHECKOUT',
   CANCEL = 'CANCEL',
   CHECKOUT_SUCCESS = 'CHECKOUT_SUCCESS',
   CHECKOUT_ERROR = 'CHECKOUT_ERROR',
-  CLEAR_CART = 'CLEAR_CART'
+  CLEAR_CART = 'CLEAR_CART',
 }
 
 export type CartEvent =
-  | { type: 'REMOVE_ITEM'; id: string }
+  | { type: 'DELETE_ITEM'; id: string }
+  | { type: 'REMOVE_ONE_ITEM'; id: string }
   | { type: 'ADD_ITEM'; item: Item }
   | { type: 'CHECKOUT' }
   | { type: 'CANCEL' }
   | { type: 'CHECKOUT_SUCCESS' }
   | { type: 'CHECKOUT_ERROR' }
-  | { type: 'CLEAR_CART' };
+  | { type: 'CLEAR_CART';  };

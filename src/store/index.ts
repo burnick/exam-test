@@ -34,7 +34,7 @@ export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) => [
     ...getDefaultMiddleware({
-      serializableCheck: process.env.NODE_ENV !== 'test' ? true : false,
+      serializableCheck:  false,
     }),
   ],
   devTools: process.env.NODE_ENV !== 'production',

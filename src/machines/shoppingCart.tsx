@@ -4,6 +4,7 @@ import { CartProps, CartEvent, Item } from 'types';
 const shoppingCartMachine = createMachine<CartProps, CartEvent>({
   id: 'shoppingCartMachine',
   initial: 'idle',
+  predictableActionArguments: true,
   context: {
     items: [],
   },
@@ -27,7 +28,30 @@ const shoppingCartMachine = createMachine<CartProps, CartEvent>({
             return context;
           }),
         },
-        REMOVE_ITEM: {
+        REMOVE_ONE_ITEM:{
+          actions: assign((context, event) => {
+            const itemEvtId = event.id as string;
+
+            const findIndex = context.items.findIndex((item) => item.id === itemEvtId && item.quantity > 1 );
+            if (findIndex !== -1) {
+              context.items[findIndex] = {
+                ...context.items[findIndex],
+                quantity:  context.items[findIndex].quantity - 1 ,
+              };
+            }
+            
+            else {
+              context.items = [
+              ...context.items.filter((item) => item.id !== itemEvtId)
+              ]
+            }
+
+            return context;
+          }),
+          target: 'idle'
+        },
+        
+        DELETE_ITEM: {
           actions: assign((context, event) => {
             const itemEvt = event.id as string;
             return {
@@ -35,18 +59,30 @@ const shoppingCartMachine = createMachine<CartProps, CartEvent>({
             };
           }),
         },
+        CLEAR_CART: {
+          actions: assign((context) => {
+            return {items: context.items.filter((item) => item.quantity < 1)};
+
+          }),
+          target: 'idle',
+        },
+        CHECKOUT: 'hasItems',
       },
     },
     hasItems: {
       on: {
         CHECKOUT: {
-          // actions: assign((context, _) => {
-          //   console.log(context)
-          //   return context;
-          // }),
+          actions: assign((context) => {
+            return  context
+
+          }),
           target: 'idle',
         },
         CLEAR_CART: {
+          actions: assign((context) => {
+            return {items: context.items.filter((item) => item.quantity < 1)};
+
+          }),
           target: 'idle',
         },
         CHECKOUT_SUCCESS: 'success',

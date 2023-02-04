@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useMachine } from '@xstate/react';
 import shoppingCartMachine from 'machines/shoppingCart';
 import styled from 'styled-components';
@@ -10,17 +10,14 @@ const Products = [
 ];
 
 const Cart: React.FC = () => {
+  const [isCartDisabled, setIsCartDisabled] = useState(false)
   const machine = useMemo(() => shoppingCartMachine, []);
-
-  const [current, send] = useMachine(machine);
-
+  const [current, send, service] = useMachine(machine);
+  const currentXstateValue= service.getSnapshot().value; 
   const { items } = current.context;
-
-  // React.useEffect(() => {
-  //   if (items.length > 0) {
-  //     send({ type: 'HANDLE_ITEM_ADDED', payload: items[0] });
-  //   }
-  // }, [send, items]);
+  React.useEffect(() => {
+    setIsCartDisabled( currentXstateValue !== 'idle');
+  }, [currentXstateValue]);
 
   const handleAddItem = useCallback(
     (evt: React.MouseEvent<Element, MouseEvent>, item: Item) => {
@@ -32,19 +29,36 @@ const Cart: React.FC = () => {
     [send],
   );
 
+  const handleDeleteItem = useCallback(
+    (evt: React.MouseEvent<Element, MouseEvent>, id: string) => {
+      evt.preventDefault();
+
+      if (id) {
+        send({ type: CartEventTypes.DELETE_ITEM, id });
+      }
+    },
+    [send],
+  );
+
   const handleRemoveItem = useCallback(
     (evt: React.MouseEvent<Element, MouseEvent>, id: string) => {
       evt.preventDefault();
 
       if (id) {
-        send({ type: CartEventTypes.REMOVE_ITEM, id });
+        send({ type: CartEventTypes.REMOVE_ONE_ITEM, id });
       }
     },
     [send],
   );
 
   const handleCheckout = useCallback(() => {
+    // console.log('CHECKOUT')
     send({ type: CartEventTypes.CHECKOUT });
+  }, [send]);
+
+  const handleClearCart = useCallback(() => {
+    // console.log('CHECKOUT')
+    send({ type: CartEventTypes.CLEAR_CART });
   }, [send]);
 
   return (
@@ -58,10 +72,18 @@ const Cart: React.FC = () => {
                 {item.name} {item.quantity}
               </ProductTitle>
               <Button
-                key={`button-${index}-${item}`}
+                key={`button-remove-${index}-${item}`}
                 onClick={(evt) => handleRemoveItem(evt, item.id)}
+                disabled={isCartDisabled}
               >
-                Remove
+                Remove 1
+              </Button>
+              <Button
+                key={`button-delete-${index}-${item}`}
+                onClick={(evt) => handleDeleteItem(evt, item.id)}
+                disabled={isCartDisabled}
+              >
+                Delete
               </Button>
             </ProductContainer>
           </li>
@@ -71,13 +93,17 @@ const Cart: React.FC = () => {
         <button
           key={`button-${product.id}`}
           onClick={(evt) => handleAddItem(evt, product)}
+          disabled={isCartDisabled}
         >
           Add {product.name}
         </button>
       ))}
-      <button onClick={handleCheckout} disabled={items.length <= 0}>
-        Checkout
-      </button>
+      {items.length > 0  && <button onClick={handleCheckout} >
+       {currentXstateValue === 'idle' ? 'Start': 'End'} Checkout 
+      </button>}
+      {items.length > 0  && <button onClick={handleClearCart} disabled={items.length <= 0}>
+        Clear cart
+      </button> }
     </div>
   );
 };
