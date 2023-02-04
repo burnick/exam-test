@@ -51,13 +51,11 @@ const Cart: React.FC = () => {
     [send],
   );
 
-  const handleCheckout = useCallback(() => {
-    // console.log('CHECKOUT')
-    send({ type: CartEventTypes.CHECKOUT });
+  const handleShowCheckout = useCallback(() => {
+    send({ type: CartEventTypes.TRY_CHECKOUT });
   }, [send]);
 
   const handleClearCart = useCallback(() => {
-    // console.log('CHECKOUT')
     send({ type: CartEventTypes.CLEAR_CART });
   }, [send]);
 
@@ -99,11 +97,7 @@ const Cart: React.FC = () => {
           Add {product.name}
         </button>
       ))}
-      {items.length > 0 && (
-        <button onClick={handleCheckout}>
-          {currentXstateValue === 'idle' ? 'Start' : 'End'} Checkout
-        </button>
-      )}
+      {items.length > 0 && <button onClick={handleShowCheckout}>Show Checkout</button>}
       {items.length > 0 && (
         <button onClick={handleClearCart} disabled={items.length <= 0}>
           Clear cart

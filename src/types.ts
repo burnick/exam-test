@@ -64,9 +64,9 @@ export enum CartEventTypes {
 }
 
 export type CartEvent =
+  | { type: 'ADD_ITEM'; item: Item }
   | { type: 'DELETE_ITEM'; id: string }
   | { type: 'REMOVE_ONE_ITEM'; id: string }
-  | { type: 'ADD_ITEM'; item: Item }
   | { type: 'TRY_CHECKOUT' }
   | { type: 'CHECKOUT' }
   | { type: 'CANCEL' }
