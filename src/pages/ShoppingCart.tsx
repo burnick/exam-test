@@ -1,11 +1,17 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useMachine } from '@xstate/react';
 import shoppingCartMachine from 'machines/shoppingCart';
 import styled from 'styled-components';
 import { Item } from 'types';
 
+
+const Products = [
+  { id: '1', name: 'apple', quantity: 1 },
+  { id: '2', name: 'banana', quantity: 1 }
+]
+
 const Cart: React.FC = () => {
-  const machine = React.useMemo(() => shoppingCartMachine, []);
+  const machine = useMemo(() => shoppingCartMachine, []);
 
   const [current, send] = useMachine(machine);
 
@@ -38,29 +44,40 @@ const Cart: React.FC = () => {
       <ul>
         {items.map((item, index) => (
           <li key={`li-${index}-${item.id}`}>
-            {item.name} {item.quantity}
+            <ProductContainer>
+           <ProductTitle> {item.name} {item.quantity}</ProductTitle>
             <Button
               key={`button-${index}-${item}`}
               onClick={(evt) => handleRemoveItem(evt, item.id)}
             >
               Remove
-            </Button>
+            </Button></ProductContainer>
           </li>
         ))}
       </ul>
-      <button
-        onClick={(evt) => handleAddItem(evt, { id: '1', name: 'apple', quantity: 1 })}
+      {Products.map(product =>  <button key={`button-${product.id}`}
+        onClick={(evt) => handleAddItem(evt, product)}
       >
-        Add Apple
-      </button>
-      <button
-        onClick={(evt) => handleAddItem(evt, { id: '2', name: 'banana', quantity: 1 })}
-      >
-        Add Banana
-      </button>
+        Add {product.name}
+      </button>)}
+     
     </div>
   );
 };
+
+
+const ProductContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 5px;
+`
+
+const ProductTitle = styled.div`
+  margin-right: 10px;
+  font-size: 12px;
+  font-weight: bold;
+`
 
 const Button = styled.button`
   font-size: 10px;
