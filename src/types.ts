@@ -60,14 +60,16 @@ export enum CartEventTypes {
   CHECKOUT_SUCCESS = 'CHECKOUT_SUCCESS',
   CHECKOUT_ERROR = 'CHECKOUT_ERROR',
   CLEAR_CART = 'CLEAR_CART',
+  TRY_CHECKOUT = 'TRY_CHECKOUT',
 }
 
 export type CartEvent =
   | { type: 'DELETE_ITEM'; id: string }
   | { type: 'REMOVE_ONE_ITEM'; id: string }
   | { type: 'ADD_ITEM'; item: Item }
+  | { type: 'TRY_CHECKOUT' }
   | { type: 'CHECKOUT' }
   | { type: 'CANCEL' }
   | { type: 'CHECKOUT_SUCCESS' }
   | { type: 'CHECKOUT_ERROR' }
-  | { type: 'CLEAR_CART';  };
+  | { type: 'CLEAR_CART' };

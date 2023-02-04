@@ -10,13 +10,13 @@ const Products = [
 ];
 
 const Cart: React.FC = () => {
-  const [isCartDisabled, setIsCartDisabled] = useState(false)
+  const [isCartDisabled, setIsCartDisabled] = useState(false);
   const machine = useMemo(() => shoppingCartMachine, []);
   const [current, send, service] = useMachine(machine);
-  const currentXstateValue= service.getSnapshot().value; 
+  const currentXstateValue = service.getSnapshot().value;
   const { items } = current.context;
   React.useEffect(() => {
-    setIsCartDisabled( currentXstateValue !== 'idle');
+    setIsCartDisabled(currentXstateValue !== 'idle');
   }, [currentXstateValue]);
 
   const handleAddItem = useCallback(
@@ -69,7 +69,8 @@ const Cart: React.FC = () => {
           <li key={`li-${index}-${item.id}`}>
             <ProductContainer>
               <ProductTitle>
-                {item.name} {item.quantity}
+                Name:
+                {item.name} Quantity: {item.quantity}
               </ProductTitle>
               <Button
                 key={`button-remove-${index}-${item}`}
@@ -98,12 +99,16 @@ const Cart: React.FC = () => {
           Add {product.name}
         </button>
       ))}
-      {items.length > 0  && <button onClick={handleCheckout} >
-       {currentXstateValue === 'idle' ? 'Start': 'End'} Checkout 
-      </button>}
-      {items.length > 0  && <button onClick={handleClearCart} disabled={items.length <= 0}>
-        Clear cart
-      </button> }
+      {items.length > 0 && (
+        <button onClick={handleCheckout}>
+          {currentXstateValue === 'idle' ? 'Start' : 'End'} Checkout
+        </button>
+      )}
+      {items.length > 0 && (
+        <button onClick={handleClearCart} disabled={items.length <= 0}>
+          Clear cart
+        </button>
+      )}
     </div>
   );
 };
