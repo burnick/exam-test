@@ -12,6 +12,7 @@ To Run:
       - formik (form)
       - prettier and eslint
       - react-testing library 
+      - xstate for shopping cart
     
   Logout to reset or clear your browsers cache
   

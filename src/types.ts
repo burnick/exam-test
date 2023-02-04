@@ -41,3 +41,17 @@ export interface UsersState {
   foundUser: boolean;
   loggedInUser: UserProps[];
 }
+export interface Item {
+  id: string;
+  name: string;
+  quantity: number;
+}
+
+export interface CartProps {
+  items: Item[];
+}
+
+export type CartEvent =
+  | { type: 'REMOVE_ITEM'; id: string }
+  | { type: 'ADD_ITEM'; item: Item }
+  | { type: 'CLEAR_CART' };

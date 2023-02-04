@@ -7,6 +7,7 @@ import Table from 'components/Table';
 import useUserContext from 'components/UserContext';
 import UserForm from 'components/UserForm';
 import { VariantButton } from 'types';
+import ShoppingCart from './ShoppingCart';
 
 const AdminPage = () => {
   const dispatch = useAppDispatch();
@@ -47,12 +48,18 @@ const AdminPage = () => {
           />
         </GridItemRight>
       </GridStyled>
+      <GridStyled>
+        <GridSpan>
+          <ShoppingCart />
+        </GridSpan>
+      </GridStyled>
     </Container>
   );
 };
 
 const Container = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100;
   align-items: start;
   justify-content: start;
@@ -83,6 +90,12 @@ const GridItemRight = styled.div`
   padding: 10px;
   text-align: right;
   justify-content: right;
+`;
+
+const GridSpan = styled.div`
+  padding: 10px;
+  box-sizing: border-box;
+  grid-column: span 2;
 `;
 
 export default AdminPage;
