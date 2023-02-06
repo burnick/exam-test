@@ -72,14 +72,10 @@ export type CartEventItemId = {
   type: CartEventTypes,
   id: string
 } 
+
 export type CartEvent =
   | CartEventItem
   | CartEventItemId
-  | { type: 'TRY_CHECKOUT' }
-  | { type: 'CHECKOUT' }
-  | { type: 'CANCEL' }
-  | { type: 'CHECKOUT_SUCCESS' }
-  | { type: 'CHECKOUT_ERROR' }
-  | { type: 'CLEAR_CART' };
+  | { type: CartEventTypes };
 
  
