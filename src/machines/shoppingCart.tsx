@@ -1,5 +1,5 @@
 import { createMachine, assign } from 'xstate';
-import { CartProps, CartEvent, Item } from 'types';
+import { CartProps, CartEvent,  CartEventItem, CartEventItemId } from 'types';
 
 const shoppingCartMachine = createMachine<CartProps, CartEvent>(
   {
@@ -44,33 +44,25 @@ const shoppingCartMachine = createMachine<CartProps, CartEvent>(
   {
     actions: {
       addItem: assign((context, event) => {
-        console.info(event.type)
-        if (event.type !== 'ADD_ITEM') {
-          return context;
-        }
-        const itemEvt = event.item as Item;
-
-        const findIndex = context.items.findIndex((item) => item.id === itemEvt.id);
+        const itemEvt = event as CartEventItem;          
+        const findIndex = context.items.findIndex((item) => item.id === itemEvt.item.id);
         if (findIndex !== -1) {
           context.items[findIndex] = {
-            ...itemEvt,
+            ...itemEvt.item,
             quantity: context.items[findIndex].quantity + 1,
           };
         } else {
-          context.items.push(itemEvt);
+          context.items.push(itemEvt.item);
         }
 
         return context;
       }),
       handleRemove1Item: assign((context, event) => {
-        if (event.type !== 'REMOVE_ONE_ITEM') {
-          return context;
-        }
+        const { id } = event as CartEventItemId;  
 
-        const itemEvtId = event.id as string;
-
+       
         const findIndex = context.items.findIndex(
-          (item) => item.id === itemEvtId && item.quantity > 1,
+          (item) => item.id === id && item.quantity > 1,
         );
         if (findIndex !== -1) {
           context.items[findIndex] = {
@@ -78,19 +70,16 @@ const shoppingCartMachine = createMachine<CartProps, CartEvent>(
             quantity: context.items[findIndex].quantity - 1,
           };
         } else {
-          context.items = [...context.items.filter((item) => item.id !== itemEvtId)];
+          context.items = [...context.items.filter((item) => item.id !== id)];
         }
 
         return context;
       }),
       deleteItem: assign((context, event) => {
-        if (event.type !== 'DELETE_ITEM') {
-          return context;
-        }
+        const { id } = event as CartEventItemId;  
 
-        const itemEvt = event.id as string;
         return {
-          items: [...context.items.filter((item) => item.id !== itemEvt)],
+          items: [...context.items.filter((item) => item.id !== id)],
         };
       }),
       handleCheckout: assign((context) => {

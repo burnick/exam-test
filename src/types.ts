@@ -63,13 +63,23 @@ export enum CartEventTypes {
   TRY_CHECKOUT = 'TRY_CHECKOUT',
 }
 
+export type CartEventItem = {
+  type: CartEventTypes,
+  item: Item
+}  
+
+export type CartEventItemId = {
+  type: CartEventTypes,
+  id: string
+} 
 export type CartEvent =
-  | { type: 'ADD_ITEM'; item: Item }
-  | { type: 'DELETE_ITEM'; id: string }
-  | { type: 'REMOVE_ONE_ITEM'; id: string }
+  | CartEventItem
+  | CartEventItemId
   | { type: 'TRY_CHECKOUT' }
   | { type: 'CHECKOUT' }
   | { type: 'CANCEL' }
   | { type: 'CHECKOUT_SUCCESS' }
   | { type: 'CHECKOUT_ERROR' }
   | { type: 'CLEAR_CART' };
+
+ 
