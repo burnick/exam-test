@@ -64,18 +64,13 @@ export enum CartEventTypes {
 }
 
 export type CartEventItem = {
-  type: CartEventTypes,
-  item: Item
-}  
+  type: CartEventTypes;
+  item: Item;
+};
 
 export type CartEventItemId = {
-  type: CartEventTypes,
-  id: string
-} 
+  type: CartEventTypes;
+  id: string;
+};
 
-export type CartEvent =
-  | CartEventItem
-  | CartEventItemId
-  | { type: CartEventTypes };
-
- 
+export type CartEvent = CartEventItem | CartEventItemId | { type: CartEventTypes };
