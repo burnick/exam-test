@@ -9,9 +9,9 @@ beforeEach(async () => {
     </TestComponent>,
   );
 });
-//beforeAll(() => {});
+// beforeAll(() => {});
 afterEach(cleanup);
-//afterAll(() => {});
+// afterAll(() => {});
 
 test('renders Login Component', async () => {
   const buttonElements = screen.getByRole('button', {
@@ -28,7 +28,7 @@ test('renders Login Component', async () => {
   expect(userNameElement).toBeVisible();
 });
 
-test('test Branch Id Input for Number input', async () => {
+test('test BranchId for Number input', async () => {
   const inputNode = screen.getByPlaceholderText('Branch Id');
   fireEvent.change(inputNode, { target: { value: '2323' } });
   await act(async () => {
@@ -36,7 +36,7 @@ test('test Branch Id Input for Number input', async () => {
   });
 });
 
-test('test Branch Id Input for Letter input', async () => {
+test('test BranchId for Letter input', async () => {
   const inputNode = screen.getByPlaceholderText('Branch Id');
   fireEvent.change(inputNode, { target: { value: 'abcde' } });
   await act(async () => {

@@ -20,6 +20,7 @@
         "@typescript-eslint",
         "react-hooks"
     ],
+    "ignorePatterns": ["**/*.test.tsx"],
     "rules": {
         "prefer-const": "error", // Turn rule off
         "react/react-in-jsx-scope": 0, //turn off must have react imported
