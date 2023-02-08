@@ -42,7 +42,7 @@ export const UsersSlice = createSlice({
   reducers: {
     findUser: (state, action: PayloadAction<LoginFormProps>) => {
       const { branchId, password, userName } = action.payload;
-      const currentState = current(state);
+      const currentState: UsersState = current(state);
 
       const loggedInUser = currentState.users.filter(
         (user: UserProps) =>
