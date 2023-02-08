@@ -1,21 +1,20 @@
- Install modules 
-   yarn install
+Install modules
+yarn install
 To Run:
 
-  1. yarn dev /start
-  2. yarn test --verbose
-  3. Application is using
-      - typescript  
-      - context api
-      - redux with redux persist (even hard reload of browser, the data is still there)
-      - yup (validations)
-      - formik (form)
-      - prettier and eslint
-      - react-testing library 
-      - xstate for shopping cart
-    
-  Logout to reset or clear your browsers cache
-  
+1. yarn dev /start
+2. yarn test --verbose
+3. Application is using
+   - typescript
+   - context api
+   - redux with localStorage (even hard reload of browser, the data is still there)
+   - yup (validations)
+   - formik (form)
+   - prettier and eslint
+   - react-testing library
+   - xstate for shopping cart
+
+Logout to reset or clear your browsers cache
 
 # Getting Started with Create React App
 

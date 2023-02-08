@@ -1,7 +1,7 @@
-import React, { createContext, useContext } from 'react';
-import { RootState } from 'store';
-import { useSelector } from 'react-redux';
-import { UsersState } from 'types';
+import React, { createContext, useContext, useMemo } from "react";
+import { RootState } from "store";
+import { useSelector } from "react-redux";
+import { UsersState } from "types";
 
 export const UserContext = createContext<UsersState>({
   users: [],
@@ -11,9 +11,20 @@ export const UserContext = createContext<UsersState>({
 
 export const UserContextProvider = (props: { children?: React.ReactNode }) => {
   const value = useSelector((state: RootState) => state);
-  const { children } = props;
 
-  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+  const { children } = props;
+  const currentValue = useMemo(() => {
+    const rootState = localStorage.getItem("rootState");
+    const currentRootState = rootState ? JSON.parse(rootState) : {};
+
+    return currentRootState && currentRootState.foundUser
+      ? { ...value, ...currentRootState }
+      : value;
+  }, [value]);
+
+  return (
+    <UserContext.Provider value={currentValue}>{children}</UserContext.Provider>
+  );
 };
 
 const useUserContext = () => useContext(UserContext);
