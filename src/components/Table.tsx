@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import { UserProps } from 'types';
 import hexToRgb from 'utils/hexToRgb';

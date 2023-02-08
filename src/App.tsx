@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import Login from 'pages/Login';
 import AdminPage from 'pages/Admin';

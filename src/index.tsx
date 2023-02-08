@@ -1,4 +1,4 @@
-import React from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 // import './index.css';
 import App from './App';
@@ -11,7 +11,7 @@ import { UserContextProvider } from 'components/UserContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
-  <React.StrictMode>
+  <StrictMode>
     <ThemeProvider theme={defaultTheme}>
       <Provider store={store}>
         <UserContextProvider>
@@ -19,7 +19,7 @@ root.render(
         </UserContextProvider>
       </Provider>
     </ThemeProvider>
-  </React.StrictMode>,
+  </StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -1,4 +1,3 @@
-import React from 'react';
 import { cleanup, render, fireEvent, act, waitFor, screen } from '@testing-library/react';
 import TestComponent from 'components/TestComponent';
 import userEvent from '@testing-library/user-event';
