@@ -7,19 +7,12 @@ import Button from 'components/Button';
 import { addUser } from 'store/slice/users';
 import { useAppDispatch } from 'store/hooks';
 import { userFormSchema } from 'utils/schema';
+import getDefaultUserValues from 'utils/getDefaultUserValues';
 
 const UserForm = () => {
   const dispatch = useAppDispatch();
   const formik = useFormik({
-    initialValues: {
-      branchId: 0,
-      userName: '',
-      firstName: '',
-      middleName: '',
-      lastName: '',
-      position: '',
-      password: '',
-    },
+    initialValues: getDefaultUserValues(),
     enableReinitialize: true,
     validationSchema: userFormSchema,
     onSubmit: (data: UserProps) => {
@@ -97,7 +90,6 @@ const UserForm = () => {
             disabled={!formik.isValid && formik.dirty}
           />
         </ButtonContainer>
-
         <ErrorContainer>
           {Object.values(formik.errors).map((error, indexKey) => (
             <span key={indexKey}>{`Error: ${error}`}</span>
