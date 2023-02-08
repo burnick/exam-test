@@ -18,7 +18,7 @@ const userPersistConfig = {
   transforms: [
     // Create a transformer by passing the reducer key and configuration. Values
     // shown below are the available configurations with default values
-    expireReducer('user', {
+    expireReducer('users', {
       expireSeconds: process.env.NODE_ENV !== 'production' ? ONE_DAY : ONE_HOUR * 8,
       autoExpire: true,
     }),
@@ -30,7 +30,6 @@ const userPersistConfig = {
 const persistedReducer = persistReducer(userPersistConfig, userReducer);
 
 export const store = configureStore({
-  preloadedState: {},
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) => [
     ...getDefaultMiddleware({

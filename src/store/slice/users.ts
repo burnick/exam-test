@@ -43,6 +43,7 @@ export const UsersSlice = createSlice({
     findUser: (state, action: PayloadAction<LoginFormProps>) => {
       const { branchId, password, userName } = action.payload;
       const currentUser = current(state);
+
       const loggedInUser = currentUser.users.filter(
         (user) =>
           user.branchId === parseInt(branchId.toString()) &&
@@ -50,7 +51,7 @@ export const UsersSlice = createSlice({
           user.userName === userName,
       );
       return {
-        users: currentUser.users,
+        users: [...currentUser.users],
         foundUser: loggedInUser.length > 0,
         loggedInUser,
       };
