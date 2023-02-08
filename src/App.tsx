@@ -14,7 +14,8 @@ const Container = styled.div`
   font-family: ${(props) => props.theme.typography.fontFamily};
   margin: ${(props) => props.theme.body.margin};
   display: flex;
+  align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  min-height: 90vh;
 `;
 export default App;
