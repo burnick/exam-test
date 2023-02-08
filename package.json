@@ -30,7 +30,7 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "dev": "nodemon start",
+    "dev": "nvm use; nodemon start",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "NODE_ENV=test react-scripts test",
