@@ -13,7 +13,7 @@ const TestComponent = ({ children }: ProvidersProps) => {
   return (
     <ThemeProvider theme={defaultTheme}>
       <Provider store={store}>
-          <UserContextProvider>{children}</UserContextProvider>
+        <UserContextProvider>{children}</UserContextProvider>
       </Provider>
     </ThemeProvider>
   );

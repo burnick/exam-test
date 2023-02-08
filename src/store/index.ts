@@ -1,5 +1,5 @@
-import { configureStore } from "@reduxjs/toolkit";
-import userReducer from "./slice/users";
+import { configureStore } from '@reduxjs/toolkit';
+import userReducer from './slice/users';
 
 export const store = configureStore({
   reducer: userReducer,
@@ -8,7 +8,7 @@ export const store = configureStore({
       serializableCheck: true,
     }),
   ],
-  devTools: process.env.NODE_ENV !== "production",
+  devTools: process.env.NODE_ENV !== 'production',
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
